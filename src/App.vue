@@ -3,7 +3,14 @@
     <!-- <h1>App 根组件</h1> -->
     <Header></Header>
     <!-- 循环渲染 -->
-    <Goods v-for="item in cart" :key="item.id"  :cart="item"></Goods>
+    <Goods v-for="item in cart" 
+    :key="item.id"  
+    :state="item.goods_state"
+    :img="item.goods_img"
+    :title="item.goods_name"
+    :price="item.goods_price"
+    :count="item.goods_count">
+    </Goods>
     <Footer></Footer>
     
 

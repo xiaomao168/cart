@@ -4,22 +4,22 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input type="checkbox" class="custom-control-input" id="cb1" :checked="item.goods_state" />
+        <input type="checkbox" class="custom-control-input" id="cb1" :checked="state" />
         <label class="custom-control-label" for="cb1">
           <!-- 商品的缩略图 -->
-          <img :src="item.goods_img" alt="图片消失" />
+          <img :src="img" alt="图片消失" />
         </label>
       </div>
     </div>
     <!-- 右侧信息区域 -->
     <div class="goods-info">
       <!-- 商品标题 -->
-      <h6 class="goods-title">{{item.goods_name}}</h6>
+      <h6 class="goods-title">{{title}}</h6>
       <div class="goods-info-bottom">
         <!-- 商品价格 -->
-        <span class="goods-price">￥{{item.goods_price}}</span>
+        <span class="goods-price">￥{{price}}</span>
         <!-- 商品的数量 -->
-        <Counter :counter="item.goods_count"></Counter>
+        <Counter :counter="count"></Counter>
       </div>
     </div>
     
@@ -31,10 +31,32 @@
 import Counter from '@/components/Counter/Counter.vue'
 export default {
 
-  props: ['cart'],
+  props: {
+    title:{
+      default: '',
+      type:String,
+    },
+    price: {
+      default: 0,
+      type:Number,
+    },
+    img: {
+      default: '',
+      type:String,
+    },
+    state: {
+      default: true,
+      type:Boolean,
+    },
+    count: {
+      default: 0,
+      type:Number,
+    }
+  },
+
   data() {
     return {
-     item:this.cart,
+    
     }
   },
 
