@@ -4,8 +4,8 @@
     <div class="thumb">
       <div class="custom-control custom-checkbox">
         <!-- 复选框 -->
-        <input type="checkbox" class="custom-control-input" id="cb1" :checked="state" />
-        <label class="custom-control-label" for="cb1">
+        <input type="checkbox" class="custom-control-input" :id="'cb'+id" :checked="state" @change="stateChange" />
+        <label class="custom-control-label" :for="'cb'+id">
           <!-- 商品的缩略图 -->
           <img :src="img" alt="图片消失" />
         </label>
@@ -19,7 +19,7 @@
         <!-- 商品价格 -->
         <span class="goods-price">￥{{price}}</span>
         <!-- 商品的数量 -->
-        <Counter :counter="count"></Counter>
+        <Counter :counter="count" :id="id"></Counter>
       </div>
     </div>
     
@@ -32,6 +32,11 @@ import Counter from '@/components/Counter/Counter.vue'
 export default {
 
   props: {
+    //通知父组件通过id修改复选框勾选状态
+   id: {
+      required: true,
+      type:Number, 
+    },
     title:{
       default: '',
       type:String,
@@ -49,23 +54,29 @@ export default {
       type:Boolean,
     },
     count: {
-      default: 0,
+      default: 1,
       type:Number,
     }
   },
 
   data() {
     return {
-    
+     
     }
   },
 
 //注册组件
   components: {
     Counter,
+  },
+  methods: {
+    stateChange(e) {
+      //触发自定义事件
+      // console.log(e);
+      this.$emit('stateChange', { id:this.id,value:e.target.checked})
+    }
   }
  
-
 }
 </script>
 
